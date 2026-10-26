@@ -23,18 +23,18 @@ public class EmpleadoService {
         return empleadoRepository.findAll();
     }
 
-    public Empleado buscarPorId(int id) {
+    public Empleado buscarPorId(Integer id) {
         return empleadoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Empleado no encontrado"));
     }
 
     public Empleado crear(Empleado empleado) {
-        empleado.setId(0);
+        empleado.setId(null);
         return empleadoRepository.save(empleado);
     }
 
-    public Empleado actualizar(int id, Empleado datos) {
+    public Empleado actualizar(Integer id, Empleado datos) {
         Empleado empleado = buscarPorId(id);
 
         empleado.setNombre(datos.getNombre());
@@ -43,7 +43,7 @@ public class EmpleadoService {
         return empleadoRepository.save(empleado);
     }
 
-    public void eliminar(int id) {
+    public void eliminar(Integer id) {
         Empleado empleado = buscarPorId(id);
         empleadoRepository.delete(empleado);
     }

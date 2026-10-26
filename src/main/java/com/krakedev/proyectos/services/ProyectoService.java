@@ -30,7 +30,7 @@ public class ProyectoService {
     }
 
     public Proyecto crear(Proyecto proyecto) {
-        proyecto.setId(0);
+        proyecto.setId(null);
         return proyectoRepository.save(proyecto);
     }
 

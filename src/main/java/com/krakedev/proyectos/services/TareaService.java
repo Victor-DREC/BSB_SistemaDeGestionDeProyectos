@@ -44,7 +44,7 @@ public class TareaService {
 
     @Transactional
     public Tarea crear(Tarea tarea) {
-        tarea.setId(0);
+        tarea.setId(null);
         prepararRelaciones(tarea);
         return tareaRepository.save(tarea);
     }

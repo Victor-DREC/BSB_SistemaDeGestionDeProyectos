@@ -55,7 +55,7 @@ public class ProyectoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizar(
-            @PathVariable int id,
+            @PathVariable Integer id,
             @RequestBody Proyecto proyecto) {
         try {
             Proyecto actualizado = proyectoService.actualizar(id, proyecto);
