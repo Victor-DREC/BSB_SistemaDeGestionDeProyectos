@@ -96,5 +96,8 @@ public class TareaService {
     public void eliminar(int id) {
         Tarea tarea = buscarPorId(id);
         tareaRepository.delete(tarea);
+//        tareaRepository.deleteAllById(id);
     }
+    
+    
 }

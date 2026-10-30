@@ -43,4 +43,20 @@ public class TareaController {
                     .body("Error al guardar la tarea: " + e.getMessage());
         }
     }
+    
+    @GetMapping("/id")
+    public ResponseEntity<?> buscarPorId(int id){
+    	try {
+    		Tarea tareaB = tareaService.buscarPorId(id);
+    		return ResponseEntity.status(HttpStatus.ACCEPTED).body(tareaB);
+    	}catch(Exception e) {
+    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    				.body("Error al tarea buscar por id");
+    	}
+    }
+    
+    public ResponseEntity<?> eliminarPorId(int id){
+    	tareaService.eliminar(id);
+    	return ResponseEntity.noContent().build();
+    }
 }
