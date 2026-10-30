@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.krakedev.proyectos.entidades.Tarea;
 import com.krakedev.proyectos.services.TareaService;
@@ -21,6 +22,7 @@ public class TareaController {
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<?> listar() {
         try {
             return ResponseEntity.ok(tareaService.listar());
@@ -31,6 +33,7 @@ public class TareaController {
     }
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> guardar(@RequestBody Tarea tarea) {
         try {
             Tarea tareaGuardada = tareaService.crear(tarea);
