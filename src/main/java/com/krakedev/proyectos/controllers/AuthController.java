@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.krakedev.proyectos.entidades.Usuario;
 import com.krakedev.proyectos.security.JwtUtil;
@@ -105,5 +107,19 @@ public class AuthController {
             respuesta.put("error", "Token inválido o expirado");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
+    }
+    
+    @GetMapping("/perfil")
+    public ResponseEntity<?> perfil() {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        Map<String, Object> respuesta = new HashMap<>();
+
+        respuesta.put("username", authentication.getName());
+        respuesta.put("authorities", authentication.getAuthorities());
+
+        return ResponseEntity.ok(respuesta);
     }
 }
